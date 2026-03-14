@@ -3,7 +3,7 @@ pipeline {
 
     stages {
 
-        stage("Pull source code") {
+        stage("Pull source codeee") {
             steps {
                 git branch: "main",
                     url: "https://github.com/ashrafmusalman/doctor-api.git"
