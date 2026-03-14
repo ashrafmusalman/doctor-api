@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: doctor-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: doctor-db
+  template:
+    metadata:
+      labels:
+        app: doctor-db
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          value: hospitalData
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: root

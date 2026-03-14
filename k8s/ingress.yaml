@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hospital-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: hospital.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hospital-service
+                port:
+                  number: 80

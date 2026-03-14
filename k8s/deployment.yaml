@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hospital-api
+  labels:
+    app: hospital-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hospital-api
+
+  template:
+    metadata:
+      labels:
+        app: hospital-api
+
+    spec:
+      containers:
+        - name: hospital-api
+          image: ashrafkhan0277/hospital-api:1.0
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 8000
+
+          envFrom:
+            - configMapRef:
+                name: hospital-config
+            - secretRef:
+                name: hospital-secret
+
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "200m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"

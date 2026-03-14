@@ -1,0 +1,48 @@
+```groovy
+pipeline {
+    agent any
+
+    stages {
+
+        stage("Pull source code") {
+            steps {
+                git branch: "main",
+                    url: "https://github.com/ashrafmusalman/Hospital.git"
+            }
+        }
+
+        stage("Building the containers") {
+            steps {
+                sh "docker compose up --build"
+            }
+        }
+
+        stage("Docker Hub Login") {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: "jenkin-PAT",
+                    usernameVariable: "DOCKER_HUB_USER",
+                    passwordVariable: "DOCKER_HUB_PASS"
+                )]) {
+                    sh "docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASS"
+                }
+            }
+        }
+
+    }
+
+    post {
+        always {
+            echo "========always========"
+        }
+
+        success {
+            echo "========pipeline executed successfully ========"
+        }
+
+        failure {
+            echo "========pipeline execution failed========"
+        }
+    }
+}
+```
