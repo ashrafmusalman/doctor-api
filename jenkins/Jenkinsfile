@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
 
@@ -24,16 +23,16 @@ pipeline {
                     usernameVariable: "DOCKER_HUB_USER",
                     passwordVariable: "DOCKER_HUB_PASS"
                 )]) {
-                    sh "docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASS"
+                    sh "echo $DOCKER_HUB_PASS | docker login -u $DOCKER_HUB_USER --password-stdin"
                 }
             }
         }
 
-        stage("Push to docker hub"){
-            sh" docker push "
+        stage("Push to docker hub") {
+            steps {
+                sh "docker push ashrafkhan0277/hospital-api:1.0"
+            }
         }
 
     }
-
-   
 }
