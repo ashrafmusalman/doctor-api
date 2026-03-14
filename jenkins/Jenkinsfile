@@ -7,13 +7,13 @@ pipeline {
         stage("Pull source code") {
             steps {
                 git branch: "main",
-                    url: "https://github.com/ashrafmusalman/Hospital.git"
+                    url: "https://github.com/ashrafmusalman/doctor-api.git"
             }
         }
 
         stage("Building the containers") {
             steps {
-                sh "docker compose up --build"
+                sh "docker compose build"
             }
         }
 
@@ -29,20 +29,11 @@ pipeline {
             }
         }
 
+        stage("Push to docker hub"){
+            sh" docker push "
+        }
+
     }
 
-    post {
-        always {
-            echo "========always========"
-        }
-
-        success {
-            echo "========pipeline executed successfully ========"
-        }
-
-        failure {
-            echo "========pipeline execution failed========"
-        }
-    }
+   
 }
-```
