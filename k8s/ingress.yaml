@@ -3,10 +3,9 @@ kind: Ingress
 metadata:
   name: hospital-ingress
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   rules:
-    - host: hospital.local
-      http:
+    - http:
         paths:
           - path: /
             pathType: Prefix
