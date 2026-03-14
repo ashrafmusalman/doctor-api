@@ -3,16 +3,17 @@ pipeline {
 
     stages {
 
-        stage("Pull source codeee") {
+        stage("Pulling the code from github") {
             steps {
                 git branch: "main",
                     url: "https://github.com/ashrafmusalman/doctor-api.git"
+                echo "CODE PULLED SUCCESSFULL"
             }
         }
 
         stage("Building the containers") {
             steps {
-                sh "docker compose build"
+                sh "docker-compose build"
             }
         }
 
@@ -33,6 +34,5 @@ pipeline {
                 sh "docker push ashrafkhan0277/hospital-api:1.0"
             }
         }
-
     }
 }
