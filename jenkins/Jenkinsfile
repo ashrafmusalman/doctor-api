@@ -3,17 +3,17 @@ pipeline {
 
     stages {
 
-        stage("Pulling the code from github") {
+        stage("Pull code") {
             steps {
                 git branch: "main",
-                    url: "https://github.com/ashrafmusalman/doctor-api.git"
+                url: "https://github.com/ashrafmusalman/doctor-api.git"
                 echo "CODE PULLED SUCCESSFULL"
             }
         }
 
-        stage("Building the containers") {
+        stage("Build Docker Image") {
             steps {
-                sh "docker-compose build"
+                sh "docker build -t ashrafkhan0277/hospital-api:${BUILD_NUMBER} ."
             }
         }
 
@@ -29,18 +29,20 @@ pipeline {
             }
         }
 
-        stage("Push to docker hub") {
+        stage("Push Image") {
             steps {
-                sh "docker push ashrafkhan0277/hospital-api:1.0"
+                sh "docker push ashrafkhan0277/hospital-api:${BUILD_NUMBER}"
             }
         }
 
         stage("Deploy to Kubernetes") {
             steps {
-                sh " kubectl apply -f k8s/"
+                sh """
+                kubectl set image deployment/hospital-api \
+                hospital-api=ashrafkhan0277/hospital-api:${BUILD_NUMBER}
+                """
             }
         }
-        
 
     }
 }
