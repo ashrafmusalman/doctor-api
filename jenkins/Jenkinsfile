@@ -38,6 +38,10 @@ pipeline {
         stage("Deploy to Kubernetes") {
             steps {
                 sh """
+                # FIRST TIME: create deployment if not exists
+                kubectl apply -f k8s/ || true
+
+                # UPDATE image (works after deployment exists)
                 kubectl set image deployment/hospital-api \
                 hospital-api=ashrafkhan0277/hospital-api:${BUILD_NUMBER}
                 """
