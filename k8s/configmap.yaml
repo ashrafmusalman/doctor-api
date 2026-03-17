@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: hospital-config
 data:
-  DB_HOST: your-db-endpoint
+  DB_HOST: hospital-postgres-db.cmb6ge6gu5ut.us-east-1.rds.amazonaws.com
+  DB_PORT: "5432"
   DB_USER: postgres
   DB_NAME: hospital
-  DB_PORT: "5432"
