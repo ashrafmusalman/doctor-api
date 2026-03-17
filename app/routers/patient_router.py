@@ -39,3 +39,16 @@ def my_appointments(
 ):
 
     return appointment_service.get_my_appointments(current_user.id)
+
+
+
+@router.put("/appointments/{appointment_id}/cancel", response_model=AppointmentResponse)
+def cancel_appointment(
+    appointment_id: int,
+    current_user = Depends(getCurrentUser),
+    appointment_service: AppointmentService = Depends(get_appointment_service)
+):
+    return appointment_service.cancel_appointment_by_patient_id(
+        appointment_id,
+        current_user.id
+    )

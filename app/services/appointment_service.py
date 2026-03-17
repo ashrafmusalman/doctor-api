@@ -28,3 +28,25 @@ class AppointmentService:
     def get_my_appointments(self, patient_id: int):
 
         return self.appointment_repo.get_by_patient(patient_id)
+    
+    
+
+    def cancel_appointment_by_patient_id(self, appointment_id: int, patient_id: int):
+
+        appointment = self.appointment_repo.get_by_id(appointment_id)
+
+        if not appointment:
+            raise HTTPException(status_code=404, detail="Appointment not found")
+
+        #  Ownership check
+        if appointment.patient_id != patient_id:
+            raise HTTPException(status_code=403, detail="Not authorized")
+
+        #  Business rules
+        if appointment.status == "cancelled":
+            raise HTTPException(status_code=400, detail="Already cancelled")
+
+        if appointment.status == "completed":
+            raise HTTPException(status_code=400, detail="Cannot cancel completed appointment")
+
+        return self.appointment_repo.cancel_appointment_by_id(appointment_id)

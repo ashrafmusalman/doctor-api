@@ -37,6 +37,6 @@ module "postgress_db" {
   rds_security_group_id = module.security_groups.rds_security_group_id
 
   db_name     = var.db_name
-  db_user     = var.db_username
-  db_password = var.db_password
+  db_user     = local.db_username
+  db_password = local.db_password
 }

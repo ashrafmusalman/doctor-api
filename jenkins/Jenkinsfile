@@ -30,7 +30,7 @@ pipeline {
         }
 
         stage("Push Image") {
-            steps {
+            steps { 
                 sh "docker push ashrafkhan0277/hospital-api:${BUILD_NUMBER}"
             }
         }

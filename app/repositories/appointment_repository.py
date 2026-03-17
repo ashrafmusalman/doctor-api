@@ -52,3 +52,20 @@ class AppointmentRepository:
 # AND appointment_time = '2026-03-20 10:00:00'
 # AND status = 'booked'
 # LIMIT 1;
+
+
+    def cancel_appointment_by_id(self, appointment_id: int):
+        appointment = self.db.query(Appointment).filter(Appointment.id == appointment_id).first()
+
+        if not appointment:
+            return None
+
+        appointment.status = "cancelled"
+        self.db.commit()
+        self.db.refresh(appointment)
+
+        return appointment
+    
+    
+    def get_by_id(self, appointment_id: int):
+     return self.db.query(Appointment).filter(Appointment.id == appointment_id).first()
