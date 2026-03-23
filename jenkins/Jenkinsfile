@@ -20,7 +20,7 @@ pipeline {
         stage("Docker Hub Login") {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: "jenkin-PAT",
+                    credentialsId: "Jenkin-PAT",
                     usernameVariable: "DOCKER_HUB_USER",
                     passwordVariable: "DOCKER_HUB_PASS"
                 )]) {
