@@ -1,11 +1,11 @@
 provider "vault" {
-    address = "http://18.207.125.97:8200/"
+    address = "http://52.91.68.17:8200/"
 
     auth_login {
         path = "auth/approle/login"
         parameters = {
-            role_id="e1983a2a-6c8d-6992-7788-bd750cf4e465"
-            secret_id="24518e97-5394-3362-8b08-52389655f387"
+            role_id="905257ff-af65-8733-dc45-be3c735dd43d"
+            secret_id="1960162d-4ce6-6cd5-d200-951a720c5620"
         }
       
     }
