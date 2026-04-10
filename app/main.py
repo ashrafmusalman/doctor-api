@@ -20,3 +20,5 @@ app.include_router(doctor_router.router)
 
 # 👇 ADD THIS (VERY IMPORTANT)
 Instrumentator().instrument(app).expose(app)
+
+ 

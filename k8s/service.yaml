@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: hospital-service
   labels:
-    app: hospital-api   # 👈 REQUIRED
+    app: hospital-api   # REQUIRED
 spec:
   selector:
     app: hospital-api
