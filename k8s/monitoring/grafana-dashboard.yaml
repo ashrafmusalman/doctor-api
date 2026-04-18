@@ -4,7 +4,7 @@ metadata:
   name: grafana-dashboard-k8s
   namespace: monitoring
   labels:
-    grafana_dashboard: "1"   # 🔥 VERY IMPORTANT
+    grafana_dashboard: "1"   #  VERY IMPORTANT
 data:
   kubernetes-cluster.json: |
     {

@@ -11,6 +11,9 @@ resource "aws_security_group" "ec2_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+
+  
+
   ingress {
   description = "Jenkins"
   from_port   = 8080
@@ -18,7 +21,6 @@ resource "aws_security_group" "ec2_sg" {
   protocol    = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
 }
-
   ingress {
     description = "HTTP"
     from_port   = 80
@@ -78,5 +80,41 @@ resource "aws_security_group" "rds_sg" {
 
   tags = {
     Name = "hospital-rds-sg"
+  }
+}
+
+
+
+resource "aws_security_group" "vault_sg" {
+
+  name   = "hospital-vault-sg"
+  vpc_id = var.vpc_id
+
+  ingress {
+  description = "SSH"
+  from_port   = 22
+  to_port     = 22
+  protocol    = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]   # or your IP for better security
+}
+
+  ingress {
+    description     = "Vault API (only from EC2)"
+    from_port       = 8200
+    to_port         = 8200
+    protocol        = "tcp"
+    security_groups = [aws_security_group.ec2_sg.id]
+  }
+
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "hospital-vault-sg"
   }
 }

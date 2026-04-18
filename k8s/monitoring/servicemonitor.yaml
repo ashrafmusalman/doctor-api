@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: hospital-api-monitor
-  namespace: monitoring   # 👈 ADD THIS
+  namespace: monitoring   #  ADD THIS
   labels:
     release: monitoring
 spec:
@@ -12,7 +12,7 @@ spec:
 
   namespaceSelector:
     matchNames:
-      - default   # 👈 where your app is running
+      - default   #  where your app is running
 
   endpoints:
     - port: http
