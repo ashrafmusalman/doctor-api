@@ -18,7 +18,7 @@ pipeline {
         }
 
 
-# here we have been injecting 
+// here we have been injecting 
         stage("Docker Hub Login") {
             steps {
                 withCredentials([usernamePassword(
