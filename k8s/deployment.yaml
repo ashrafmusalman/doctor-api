@@ -31,7 +31,7 @@ spec:
     spec:
       serviceAccountName: vault-auth-sa
 
-      containers:
+      containers:   # ✅ CORRECT PLACE
         - name: hospital-api
           image: ashrafkhan0277/hospital-api:1.0
 
@@ -48,7 +48,7 @@ spec:
               echo "Loading Vault secrets..."
               . /vault/secrets/config
               echo "Starting app..."
-              python app/main.py   # 🔥 FIXED PATH
+              python -m app.main
 
           resources:
             requests:
